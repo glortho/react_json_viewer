@@ -2,7 +2,7 @@
   "name": "react_json_viewer",
   "version": "1.0.0",
   "description": "I wanted to mess with React some more. I needed to look at some JSON data. This happened.",
-  "main": "src/jsx/jsonViewer.js",
+  "main": "dist/js/jsonViewer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
