@@ -1,0 +1,22 @@
+{
+  "name": "react_json_viewer",
+  "version": "1.0.0",
+  "description": "I wanted to mess with React some more. I needed to look at some JSON data. This happened.",
+  "main": "src/jsx/jsonViewer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jedverity/react_json_viewer.git"
+  },
+  "author": "David Vedder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jedverity/react_json_viewer/issues"
+  },
+  "homepage": "https://github.com/jedverity/react_json_viewer",
+  "dependencies": {
+    "react": "^0.12.1"
+  }
+}

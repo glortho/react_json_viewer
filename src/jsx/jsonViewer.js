@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 /*
     =========================
  * React JSONTree
@@ -8,7 +6,7 @@
  * MIT Licence
     =========================
  */
-
+var React = require('react');
 /**
  * Creates a React JSON Viewer component for a key and it's associated data
  *
@@ -21,17 +19,17 @@ var grabNode = function (key, value) {
     var theNode;
     var aKey = key + Date.now();
     if (nodeType === 'Object') {
-        theNode = <JSONObjectNode data={value} keyName={key} key={aKey}  />
+        theNode = <JSONObjectNode data={value} keyName={key} key={aKey}  />;
     } else if (nodeType === 'Array') {
-        theNode = <JSONArrayNode data={value}  keyName={key} key={aKey} />
+        theNode = <JSONArrayNode data={value}  keyName={key} key={aKey} />;
     } else if (nodeType === 'String') {
-        theNode = <JSONStringNode keyName={key} value={value} key={aKey} />
+        theNode = <JSONStringNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Number') {
-        theNode = <JSONNumberNode keyName={key} value={value} key={aKey} />
+        theNode = <JSONNumberNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Boolean') {
-        theNode = <JSONBooleanNode keyName={key} value={value} key={aKey} />
+        theNode = <JSONBooleanNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Null') {
-        theNode = <JSONNullNode keyName={key} value={value} key={aKey} />
+        theNode = <JSONNullNode keyName={key} value={value} key={aKey} />;
     } else {
         console.error("How did this happen?", nodeType);
     }
@@ -47,7 +45,7 @@ var grabNode = function (key, value) {
 var objType  = function (obj) {
     var className = Object.prototype.toString.call(obj).slice(8, -1);
     return className;
-}
+};
 
 /**
  * Mixin for stopping events from propagating and collapsing our tree all
@@ -80,7 +78,7 @@ var ExpandedStateHandlerMixin = {
     componentWillReceiveProps: function () {
         // resets our caches and flags we need to build child nodes again
         this.renderedChildren = [];
-        this.itemString = false
+        this.itemString = false;
         this.needsChildNodes= true;
     }
 };
@@ -165,7 +163,7 @@ var JSONObjectNode = React.createClass({
         if (this.state.expanded && this.needsChildNodes) {
             var obj = this.props.data;
             var childNodes = [];
-            for (k in obj) {
+            for (var k in obj) {
                 if (obj.hasOwnProperty(k)) {
                     childNodes.push( grabNode(k, obj[k]));
                 }
@@ -184,7 +182,7 @@ var JSONObjectNode = React.createClass({
             var obj = this.props.data;
             var len = 0;
             var lenWord = ' Items';
-            for (k in obj) {
+            for (var k in obj) {
                 if (obj.hasOwnProperty(k)) {
                     len += 1;
                 }
@@ -192,7 +190,7 @@ var JSONObjectNode = React.createClass({
             if (len === 1) {
                 lenWord = ' Item';
             }
-            this.itemString = len + lenWord
+            this.itemString = len + lenWord;
         }
         return this.itemString;
     },
@@ -333,9 +331,9 @@ var JSONTree = React.createClass({
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = <JSONObjectNode data={this.props.data} keyName="(root)" initialExpanded={true} />
+            rootNode = <JSONObjectNode data={this.props.data} keyName="(root)" initialExpanded={true} />;
         } else if (nodeType === 'Array') {
-            rootNode = <JSONArrayNode data={this.props.data} initialExpanded={true} keyName="(root)" />
+            rootNode = <JSONArrayNode data={this.props.data} initialExpanded={true} keyName="(root)" />;
         } else {
             console.error("How did you manage that?");
         }
@@ -347,3 +345,4 @@ var JSONTree = React.createClass({
     }
 });
 
+module.exports = JSONTree;
