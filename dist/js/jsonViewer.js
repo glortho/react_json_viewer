@@ -19,17 +19,17 @@ var grabNode = function (key, value) {
     var theNode;
     var aKey = key + Date.now();
     if (nodeType === 'Object') {
-        theNode = JSONObjectNode({data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONObjectNode, {data: value, keyName: key, key: aKey});
     } else if (nodeType === 'Array') {
-        theNode = JSONArrayNode({data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONArrayNode, {data: value, keyName: key, key: aKey});
     } else if (nodeType === 'String') {
-        theNode = JSONStringNode({keyName: key, value: value, key: aKey});
+        theNode = React.createElement(JSONStringNode, {keyName: key, value: value, key: aKey});
     } else if (nodeType === 'Number') {
-        theNode = JSONNumberNode({keyName: key, value: value, key: aKey});
+        theNode = React.createElement(JSONNumberNode, {keyName: key, value: value, key: aKey});
     } else if (nodeType === 'Boolean') {
-        theNode = JSONBooleanNode({keyName: key, value: value, key: aKey});
+        theNode = React.createElement(JSONBooleanNode, {keyName: key, value: value, key: aKey});
     } else if (nodeType === 'Null') {
-        theNode = JSONNullNode({keyName: key, value: value, key: aKey});
+        theNode = React.createElement(JSONNullNode, {keyName: key, value: value, key: aKey});
     } else {
         console.error("How did this happen?", nodeType);
     }
@@ -137,10 +137,10 @@ var JSONArrayNode = React.createClass({displayName: 'JSONArrayNode',
         var cls = "array parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         return (
-            React.DOM.li({className: cls, onClick: this.handleClick}, 
-                React.DOM.label(null, this.props.keyName, ":"), 
-                React.DOM.span(null, this.getItemString()), 
-                React.DOM.ol({style: childListStyle}, 
+            React.createElement("li", {className: cls, onClick: this.handleClick}, 
+                React.createElement("label", null, this.props.keyName, ":"), 
+                React.createElement("span", null, this.getItemString()), 
+                React.createElement("ol", {style: childListStyle}, 
                     childNodes
                 )
             )
@@ -213,10 +213,10 @@ var JSONObjectNode = React.createClass({displayName: 'JSONObjectNode',
         var cls = "object parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         return (
-            React.DOM.li({className: cls, onClick: this.handleClick}, 
-                React.DOM.label(null, this.props.keyName, ":"), 
-                React.DOM.span(null, this.getItemString()), 
-                React.DOM.ul({style: childListStyle}, 
+            React.createElement("li", {className: cls, onClick: this.handleClick}, 
+                React.createElement("label", null, this.props.keyName, ":"), 
+                React.createElement("span", null, this.getItemString()), 
+                React.createElement("ul", {style: childListStyle}, 
                      this.getChildNodes() 
                 )
             )
@@ -231,9 +231,9 @@ var JSONStringNode = React.createClass({displayName: 'JSONStringNode',
     mixins: [SquashClickEventMixin],
     render: function () {
         return (
-            React.DOM.li({className: "string itemNode", onClick: this.handleClick}, 
-                React.DOM.label(null, this.props.keyName, ":"), 
-                React.DOM.span(null, this.props.value)
+            React.createElement("li", {className: "string itemNode", onClick: this.handleClick}, 
+                React.createElement("label", null, this.props.keyName, ":"), 
+                React.createElement("span", null, this.props.value)
             )
         );
     }
@@ -246,9 +246,9 @@ var JSONNumberNode = React.createClass({displayName: 'JSONNumberNode',
     mixins: [SquashClickEventMixin],
     render: function () {
         return (
-            React.DOM.li({className: "number itemNode", onClick: this.handleClick}, 
-                React.DOM.label(null, this.props.keyName, ":"), 
-                React.DOM.span(null, this.props.value)
+            React.createElement("li", {className: "number itemNode", onClick: this.handleClick}, 
+                React.createElement("label", null, this.props.keyName, ":"), 
+                React.createElement("span", null, this.props.value)
             )
         );
     }
@@ -262,9 +262,9 @@ var JSONNullNode = React.createClass({displayName: 'JSONNullNode',
     mixins: [SquashClickEventMixin],
     render: function () {
         return (
-            React.DOM.li({className: "null itemNode", onClick: this.handleClick}, 
-                React.DOM.label(null, this.props.keyName, ":"), 
-                React.DOM.span(null, "null")
+            React.createElement("li", {className: "null itemNode", onClick: this.handleClick}, 
+                React.createElement("label", null, this.props.keyName, ":"), 
+                React.createElement("span", null, "null")
             )
         );
     }
@@ -278,9 +278,9 @@ var JSONBooleanNode = React.createClass({displayName: 'JSONBooleanNode',
     render: function () {
         var truthString = (this.props.value) ? 'true' : 'false';
         return (
-            React.DOM.li({className: "boolean itemNode " + truthString, onClick: this.handleClick}, 
-                React.DOM.label(null, this.props.keyName, ":"), 
-                React.DOM.span(null, truthString)
+            React.createElement("li", {className: "boolean itemNode " + truthString, onClick: this.handleClick}, 
+                React.createElement("label", null, this.props.keyName, ":"), 
+                React.createElement("span", null, truthString)
             )
         );
     }
@@ -331,14 +331,14 @@ var JSONTree = React.createClass({displayName: 'JSONTree',
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = JSONObjectNode({data: this.props.data, keyName: "(root)", initialExpanded: true});
+            rootNode = React.createElement(JSONObjectNode, {data: this.props.data, keyName: "(root)", initialExpanded: true});
         } else if (nodeType === 'Array') {
-            rootNode = JSONArrayNode({data: this.props.data, initialExpanded: true, keyName: "(root)"});
+            rootNode = React.createElement(JSONArrayNode, {data: this.props.data, initialExpanded: true, keyName: "(root)"});
         } else {
             console.error("How did you manage that?");
         }
         return (
-            React.DOM.ul({className: "json_tree"}, 
+            React.createElement("ul", {className: "json_tree"}, 
                 rootNode 
             )
         );
