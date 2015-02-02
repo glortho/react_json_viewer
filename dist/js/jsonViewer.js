@@ -334,9 +334,9 @@ var JSONTree = React.createClass({displayName: 'JSONTree',
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = React.createElement(JSONObjectNode, {onClickItem: this.props.onClick, data: this.props.data, keyName: "(root)", initialExpanded: true});
+            rootNode = React.createElement(JSONObjectNode, {onClickItem: this.props.onClickItem, data: this.props.data, keyName: "(root)", initialExpanded: true});
         } else if (nodeType === 'Array') {
-            rootNode = React.createElement(JSONArrayNode, {onClickItem: this.props.onClick, data: this.props.data, initialExpanded: true, keyName: "(root)"});
+            rootNode = React.createElement(JSONArrayNode, {onClickItem: this.props.onClickItem, data: this.props.data, initialExpanded: true, keyName: "(root)"});
         } else {
             console.error("How did you manage that?");
         }
