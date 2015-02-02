@@ -73,9 +73,10 @@ var ExpandedStateHandlerMixin = {
     },
     handleClick: function (e) {
         e.stopPropagation();
-        this.setState({expanded: !this.state.expanded});
-        if ( this.props.onClick )
-          this.props.onClick( this.state );
+        this.setState({expanded: !this.state.expanded}, function() {
+          if ( this.props.onClick )
+            this.props.onClick( this.props, this.state );
+        }.bind(this));
     },
     componentWillReceiveProps: function () {
         // resets our caches and flags we need to build child nodes again
@@ -333,9 +334,9 @@ var JSONTree = React.createClass({
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = <JSONObjectNode onClick={this.props.onClick} data={this.props.data} keyName="(root)" initialExpanded={true} />;
+            rootNode = <JSONObjectNode onClickItem={this.props.onClick} data={this.props.data} keyName="(root)" initialExpanded={true} />;
         } else if (nodeType === 'Array') {
-            rootNode = <JSONArrayNode onClick={this.props.onClick} data={this.props.data} initialExpanded={true} keyName="(root)" />;
+            rootNode = <JSONArrayNode onClickItem={this.props.onClick} data={this.props.data} initialExpanded={true} keyName="(root)" />;
         } else {
             console.error("How did you manage that?");
         }
