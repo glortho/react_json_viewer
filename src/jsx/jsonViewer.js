@@ -14,14 +14,14 @@ var React = require('react');
  * @param value Mixed The associated data for the JSON key
  * @return Component The React Component for that node
  */
-var grabNode = function (key, value) {
+var grabNode = function (key, value, props) {
     var nodeType = objType(value);
     var theNode;
     var aKey = key + Date.now();
     if (nodeType === 'Object') {
-        theNode = <JSONObjectNode onClickItem={this.props.onClickItem} data={value} keyName={key} key={aKey}  />;
+        theNode = <JSONObjectNode onClickItem={props.onClickItem} data={value} keyName={key} key={aKey}  />;
     } else if (nodeType === 'Array') {
-        theNode = <JSONArrayNode onClickItem={this.props.onClickItem} data={value}  keyName={key} key={aKey} />;
+        theNode = <JSONArrayNode onClickItem={props.onClickItem} data={value}  keyName={key} key={aKey} />;
     } else if (nodeType === 'String') {
         theNode = <JSONStringNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Number') {
@@ -102,7 +102,7 @@ var JSONArrayNode = React.createClass({
         var childNodes = [];
         if (this.state.expanded && this.needsChildNodes) {
             for (var i = 0; i < this.props.data.length; i += 1) {
-                childNodes.push( grabNode(i, this.props.data[i]));
+                childNodes.push( grabNode(i, this.props.data[i], this.props));
             }
             this.needsChildNodes = false;
             this.renderedChildren = childNodes;
@@ -168,7 +168,7 @@ var JSONObjectNode = React.createClass({
             var childNodes = [];
             for (var k in obj) {
                 if (obj.hasOwnProperty(k)) {
-                    childNodes.push( grabNode(k, obj[k]));
+                    childNodes.push( grabNode(k, obj[k], this.props));
                 }
             }
             this.needsChildNodes = false;
