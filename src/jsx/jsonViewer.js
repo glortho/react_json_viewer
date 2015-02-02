@@ -74,8 +74,8 @@ var ExpandedStateHandlerMixin = {
     handleClick: function (e) {
         e.stopPropagation();
         this.setState({expanded: !this.state.expanded}, function() {
-          if ( this.props.onClick )
-            this.props.onClick( this.props, this.state );
+          if ( this.props.onClickItem )
+            this.props.onClickItem( this.props, this.state );
         }.bind(this));
     },
     componentWillReceiveProps: function () {
