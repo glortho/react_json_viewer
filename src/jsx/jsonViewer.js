@@ -74,6 +74,8 @@ var ExpandedStateHandlerMixin = {
     handleClick: function (e) {
         e.stopPropagation();
         this.setState({expanded: !this.state.expanded});
+        if ( this.props.onClick )
+          this.props.onClick( this.state );
     },
     componentWillReceiveProps: function () {
         // resets our caches and flags we need to build child nodes again
