@@ -19,9 +19,9 @@ var grabNode = function (key, value) {
     var theNode;
     var aKey = key + Date.now();
     if (nodeType === 'Object') {
-        theNode = React.createElement(JSONObjectNode, {data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONObjectNode, {onClickItem: this.props.onClickItem, data: value, keyName: key, key: aKey});
     } else if (nodeType === 'Array') {
-        theNode = React.createElement(JSONArrayNode, {data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONArrayNode, {onClickItem: this.props.onClickItem, data: value, keyName: key, key: aKey});
     } else if (nodeType === 'String') {
         theNode = React.createElement(JSONStringNode, {keyName: key, value: value, key: aKey});
     } else if (nodeType === 'Number') {

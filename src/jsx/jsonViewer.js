@@ -19,9 +19,9 @@ var grabNode = function (key, value) {
     var theNode;
     var aKey = key + Date.now();
     if (nodeType === 'Object') {
-        theNode = <JSONObjectNode data={value} keyName={key} key={aKey}  />;
+        theNode = <JSONObjectNode onClickItem={this.props.onClickItem} data={value} keyName={key} key={aKey}  />;
     } else if (nodeType === 'Array') {
-        theNode = <JSONArrayNode data={value}  keyName={key} key={aKey} />;
+        theNode = <JSONArrayNode onClickItem={this.props.onClickItem} data={value}  keyName={key} key={aKey} />;
     } else if (nodeType === 'String') {
         theNode = <JSONStringNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Number') {
