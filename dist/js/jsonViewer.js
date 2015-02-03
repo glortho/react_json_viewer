@@ -18,10 +18,11 @@ var grabNode = function (key, value, props) {
     var nodeType = objType(value);
     var theNode;
     var aKey = key + Date.now();
+    var initialExpanded = props.expansions && props.expansions[key];
     if (nodeType === 'Object') {
-        theNode = React.createElement(JSONObjectNode, {onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONObjectNode, {initialExpanded: initialExpanded, onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
     } else if (nodeType === 'Array') {
-        theNode = React.createElement(JSONArrayNode, {onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONArrayNode, {initialExpanded: initialExpanded, onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
     } else if (nodeType === 'String') {
         theNode = React.createElement(JSONStringNode, {keyName: key, value: value, key: aKey});
     } else if (nodeType === 'Number') {
@@ -334,9 +335,9 @@ var JSONTree = React.createClass({displayName: 'JSONTree',
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = React.createElement(JSONObjectNode, {onClickItem: this.props.onClickItem, data: this.props.data, keyName: "(root)", initialExpanded: true});
+            rootNode = React.createElement(JSONObjectNode, {expansions: this.props.expansions, onClickItem: this.props.onClickItem, data: this.props.data, keyName: "(root)", initialExpanded: true});
         } else if (nodeType === 'Array') {
-            rootNode = React.createElement(JSONArrayNode, {onClickItem: this.props.onClickItem, data: this.props.data, initialExpanded: true, keyName: "(root)"});
+            rootNode = React.createElement(JSONArrayNode, {expansions: this.props.expansions, onClickItem: this.props.onClickItem, data: this.props.data, initialExpanded: true, keyName: "(root)"});
         } else {
             console.error("How did you manage that?");
         }

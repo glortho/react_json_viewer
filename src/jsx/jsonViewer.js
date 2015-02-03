@@ -18,10 +18,11 @@ var grabNode = function (key, value, props) {
     var nodeType = objType(value);
     var theNode;
     var aKey = key + Date.now();
+    var initialExpanded = props.expansions && props.expansions[key];
     if (nodeType === 'Object') {
-        theNode = <JSONObjectNode onClickItem={props.onClickItem} data={value} keyName={key} key={aKey}  />;
+        theNode = <JSONObjectNode initialExpanded={initialExpanded} onClickItem={props.onClickItem} data={value} keyName={key} key={aKey}  />;
     } else if (nodeType === 'Array') {
-        theNode = <JSONArrayNode onClickItem={props.onClickItem} data={value}  keyName={key} key={aKey} />;
+        theNode = <JSONArrayNode initialExpanded={initialExpanded} onClickItem={props.onClickItem} data={value}  keyName={key} key={aKey} />;
     } else if (nodeType === 'String') {
         theNode = <JSONStringNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Number') {
@@ -334,9 +335,9 @@ var JSONTree = React.createClass({
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = <JSONObjectNode onClickItem={this.props.onClickItem} data={this.props.data} keyName="(root)" initialExpanded={true} />;
+            rootNode = <JSONObjectNode expansions={this.props.expansions} onClickItem={this.props.onClickItem} data={this.props.data} keyName="(root)" initialExpanded={true} />;
         } else if (nodeType === 'Array') {
-            rootNode = <JSONArrayNode onClickItem={this.props.onClickItem} data={this.props.data} initialExpanded={true} keyName="(root)" />;
+            rootNode = <JSONArrayNode expansions={this.props.expansions} onClickItem={this.props.onClickItem} data={this.props.data} initialExpanded={true} keyName="(root)" />;
         } else {
             console.error("How did you manage that?");
         }
