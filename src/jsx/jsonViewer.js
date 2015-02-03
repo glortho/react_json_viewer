@@ -20,9 +20,9 @@ var grabNode = function (key, value, props) {
     var aKey = key + Date.now();
     var initialExpanded = props.expansions && props.expansions[key];
     if (nodeType === 'Object') {
-        theNode = <JSONObjectNode initialExpanded={initialExpanded} onClickItem={props.onClickItem} data={value} keyName={key} key={aKey}  />;
+        theNode = <JSONObjectNode expansions={expansions} initialExpanded={initialExpanded} onClickItem={props.onClickItem} data={value} keyName={key} key={aKey}  />;
     } else if (nodeType === 'Array') {
-        theNode = <JSONArrayNode initialExpanded={initialExpanded} onClickItem={props.onClickItem} data={value}  keyName={key} key={aKey} />;
+        theNode = <JSONArrayNode expansions={expansions} initialExpanded={initialExpanded} onClickItem={props.onClickItem} data={value}  keyName={key} key={aKey} />;
     } else if (nodeType === 'String') {
         theNode = <JSONStringNode keyName={key} value={value} key={aKey} />;
     } else if (nodeType === 'Number') {
