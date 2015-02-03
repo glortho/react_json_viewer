@@ -20,9 +20,9 @@ var grabNode = function (key, value, props) {
     var aKey = key + Date.now();
     var initialExpanded = props.expansions && props.expansions[key];
     if (nodeType === 'Object') {
-        theNode = React.createElement(JSONObjectNode, {expansions: expansions, initialExpanded: initialExpanded, onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONObjectNode, {expansions: props.expansions, initialExpanded: initialExpanded, onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
     } else if (nodeType === 'Array') {
-        theNode = React.createElement(JSONArrayNode, {expansions: expansions, initialExpanded: initialExpanded, onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
+        theNode = React.createElement(JSONArrayNode, {expansions: props.expansions, initialExpanded: initialExpanded, onClickItem: props.onClickItem, data: value, keyName: key, key: aKey});
     } else if (nodeType === 'String') {
         theNode = React.createElement(JSONStringNode, {keyName: key, value: value, key: aKey});
     } else if (nodeType === 'Number') {
