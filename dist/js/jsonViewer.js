@@ -220,8 +220,10 @@ var JSONObjectNode = React.createClass({displayName: 'JSONObjectNode',
         cls += (this.state.expanded) ? " expanded" : '';
         return (
             React.createElement("li", {className: cls, onClick: this.handleClick}, 
-                React.createElement("label", null, this.props.keyName, ":"), 
-                React.createElement("span", null, this.getItemString()), 
+                 this.props.keyName != '(root)' && [
+                  React.createElement("label", null, this.props.keyName, ":"),
+                  React.createElement("span", null, this.getItemString())
+                ], 
                 React.createElement("ul", {style: childListStyle}, 
                      this.getChildNodes() 
                 )
