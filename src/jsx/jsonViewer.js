@@ -142,8 +142,10 @@ var JSONArrayNode = React.createClass({
         cls += (this.state.expanded) ? " expanded" : '';
         return (
             <li className={cls} onClick={this.handleClick}>
-                <label>{this.props.keyName}:</label>
-                <span>{this.getItemString()}</span>
+                { this.props.keyName != '(root)' && [
+                  <label>{this.props.keyName}:</label>,
+                  <span>{this.getItemString()}</span>
+                ]}
                 <ol style={childListStyle}>
                     {childNodes}
                 </ol>
