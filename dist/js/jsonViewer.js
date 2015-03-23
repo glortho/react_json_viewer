@@ -141,10 +141,13 @@ var JSONArrayNode = React.createClass({displayName: 'JSONArrayNode',
         var cls = "array parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         cls += this.props.showRoot ? " root-showing" : '';
+
+        var display = this.props.keyName == '(root)' ? '' : this.props.keyName;
+
         return (
             React.createElement("li", {className: cls}, 
                  (this.props.showRoot || this.props.keyName != '(root)') && [
-                  React.createElement("label", {onClick: this.handleClick}, this.props.keyName, ":"),
+                  React.createElement("label", {onClick: this.handleClick}, display),
                   React.createElement("span", {onClick: this.handleClick}, this.getItemString())
                 ], 
                 React.createElement("ol", {style: childListStyle}, 
@@ -220,10 +223,13 @@ var JSONObjectNode = React.createClass({displayName: 'JSONObjectNode',
         var cls = "object parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         cls += this.props.showRoot ? " root-showing" : '';
+
+        var display = this.props.keyName == '(root)' ? '' : this.props.keyName;
+
         return (
             React.createElement("li", {className: cls}, 
                  ( this.props.showRoot || this.props.keyName != '(root)' ) && [
-                  React.createElement("label", {onClick: this.handleClick}, this.props.keyName, ":"),
+                  React.createElement("label", {onClick: this.handleClick}, display),
                   React.createElement("span", {onClick: this.handleClick}, this.getItemString())
                 ], 
                 React.createElement("ul", {style: childListStyle}, 

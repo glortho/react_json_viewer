@@ -141,10 +141,13 @@ var JSONArrayNode = React.createClass({
         var cls = "array parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         cls += this.props.showRoot ? " root-showing" : '';
+
+        var display = this.props.keyName == '(root)' ? '' : this.props.keyName;
+
         return (
             <li className={cls}>
                 { (this.props.showRoot || this.props.keyName != '(root)') && [
-                  <label onClick={this.handleClick}>{this.props.keyName}:</label>,
+                  <label onClick={this.handleClick}>{display}</label>,
                   <span onClick={this.handleClick}>{this.getItemString()}</span>
                 ]}
                 <ol style={childListStyle}>
@@ -220,10 +223,13 @@ var JSONObjectNode = React.createClass({
         var cls = "object parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         cls += this.props.showRoot ? " root-showing" : '';
+
+        var display = this.props.keyName == '(root)' ? '' : this.props.keyName;
+
         return (
             <li className={cls}>
                 { ( this.props.showRoot || this.props.keyName != '(root)' ) && [
-                  <label onClick={this.handleClick}>{this.props.keyName}:</label>,
+                  <label onClick={this.handleClick}>{display}</label>,
                   <span onClick={this.handleClick}>{this.getItemString()}</span>
                 ]}
                 <ul style={childListStyle}>
