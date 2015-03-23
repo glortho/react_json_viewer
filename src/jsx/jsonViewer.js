@@ -219,7 +219,7 @@ var JSONObjectNode = React.createClass({
         var cls = "object parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
         return (
-            <li className={cls} onClick={this.handleClick}>
+            <li className={cls}>
                 { ( this.props.showRoot || this.props.keyName != '(root)' ) && [
                   <label>{this.props.keyName}:</label>,
                   <span>{this.getItemString()}</span>
