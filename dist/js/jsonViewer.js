@@ -142,7 +142,7 @@ var JSONArrayNode = React.createClass({displayName: 'JSONArrayNode',
         cls += (this.state.expanded) ? " expanded" : '';
         return (
             React.createElement("li", {className: cls}, 
-                 this.props.keyName != '(root)' && [
+                 (this.props.showRoot || this.props.keyName != '(root)') && [
                   React.createElement("label", null, this.props.keyName, ":"),
                   React.createElement("span", null, this.getItemString())
                 ], 
@@ -220,7 +220,7 @@ var JSONObjectNode = React.createClass({displayName: 'JSONObjectNode',
         cls += (this.state.expanded) ? " expanded" : '';
         return (
             React.createElement("li", {className: cls, onClick: this.handleClick}, 
-                 this.props.keyName != '(root)' && [
+                 ( this.props.showRoot || this.props.keyName != '(root)' ) && [
                   React.createElement("label", null, this.props.keyName, ":"),
                   React.createElement("span", null, this.getItemString())
                 ], 
@@ -339,9 +339,27 @@ var JSONTree = React.createClass({displayName: 'JSONTree',
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = React.createElement(JSONObjectNode, {expansions: this.props.expansions, onClickItem: this.props.onClickItem, data: this.props.data, keyName: "(root)", initialExpanded: true});
+            rootNode = (
+              React.createElement(JSONObjectNode, {
+                expansions: this.props.expansions, 
+                onClickItem: this.props.onClickItem, 
+                data: this.props.data, 
+                keyName: "(root)", 
+                showRoot: this.props.showRoot, 
+                initialExpanded: true}
+              )
+            );
         } else if (nodeType === 'Array') {
-            rootNode = React.createElement(JSONArrayNode, {expansions: this.props.expansions, onClickItem: this.props.onClickItem, data: this.props.data, initialExpanded: true, keyName: "(root)"});
+            rootNode = (
+              React.createElement(JSONArrayNode, {
+                expansions: this.props.expansions, 
+                onClickItem: this.props.onClickItem, 
+                data: this.props.data, 
+                initialExpanded: true, 
+                showRoot: this.props.showRoot, 
+                keyName: "(root)"}
+              )
+            );
         } else {
             console.error("How did you manage that?");
         }

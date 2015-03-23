@@ -142,7 +142,7 @@ var JSONArrayNode = React.createClass({
         cls += (this.state.expanded) ? " expanded" : '';
         return (
             <li className={cls}>
-                { this.props.keyName != '(root)' && [
+                { (this.props.showRoot || this.props.keyName != '(root)') && [
                   <label>{this.props.keyName}:</label>,
                   <span>{this.getItemString()}</span>
                 ]}
@@ -220,7 +220,7 @@ var JSONObjectNode = React.createClass({
         cls += (this.state.expanded) ? " expanded" : '';
         return (
             <li className={cls} onClick={this.handleClick}>
-                { this.props.keyName != '(root)' && [
+                { ( this.props.showRoot || this.props.keyName != '(root)' ) && [
                   <label>{this.props.keyName}:</label>,
                   <span>{this.getItemString()}</span>
                 ]}
@@ -339,9 +339,27 @@ var JSONTree = React.createClass({
         var nodeType = objType(this.props.data);
         var rootNode;
         if (nodeType === 'Object') {
-            rootNode = <JSONObjectNode expansions={this.props.expansions} onClickItem={this.props.onClickItem} data={this.props.data} keyName="(root)" initialExpanded={true} />;
+            rootNode = (
+              <JSONObjectNode 
+                expansions      = {this.props.expansions}
+                onClickItem     = {this.props.onClickItem}
+                data            = {this.props.data}
+                keyName         = "(root)"
+                showRoot        = {this.props.showRoot}
+                initialExpanded = {true}
+              />
+            );
         } else if (nodeType === 'Array') {
-            rootNode = <JSONArrayNode expansions={this.props.expansions} onClickItem={this.props.onClickItem} data={this.props.data} initialExpanded={true} keyName="(root)" />;
+            rootNode = (
+              <JSONArrayNode 
+                expansions      = {this.props.expansions}
+                onClickItem     = {this.props.onClickItem}
+                data            = {this.props.data}
+                initialExpanded = {true}
+                showRoot        = {this.props.showRoot}
+                keyName         = "(root)"
+              />
+            );
         } else {
             console.error("How did you manage that?");
         }
