@@ -140,6 +140,7 @@ var JSONArrayNode = React.createClass({
         };
         var cls = "array parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
+        cls += this.props.showRoot ? " root-showing" : '';
         return (
             <li className={cls}>
                 { (this.props.showRoot || this.props.keyName != '(root)') && [
@@ -218,6 +219,7 @@ var JSONObjectNode = React.createClass({
         };
         var cls = "object parentNode";
         cls += (this.state.expanded) ? " expanded" : '';
+        cls += this.props.showRoot ? " root-showing" : '';
         return (
             <li className={cls}>
                 { ( this.props.showRoot || this.props.keyName != '(root)' ) && [
