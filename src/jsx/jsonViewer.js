@@ -143,7 +143,7 @@ var JSONArrayNode = React.createClass({
         return (
             <li className={cls}>
                 { (this.props.showRoot || this.props.keyName != '(root)') && [
-                  <label>{this.props.keyName}:</label>,
+                  <label onClick={this.handleClick}>{this.props.keyName}:</label>,
                   <span>{this.getItemString()}</span>
                 ]}
                 <ol style={childListStyle}>
@@ -221,7 +221,7 @@ var JSONObjectNode = React.createClass({
         return (
             <li className={cls}>
                 { ( this.props.showRoot || this.props.keyName != '(root)' ) && [
-                  <label>{this.props.keyName}:</label>,
+                  <label onClick={this.handleClick}>{this.props.keyName}:</label>,
                   <span>{this.getItemString()}</span>
                 ]}
                 <ul style={childListStyle}>

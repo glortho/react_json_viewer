@@ -143,7 +143,7 @@ var JSONArrayNode = React.createClass({displayName: 'JSONArrayNode',
         return (
             React.createElement("li", {className: cls}, 
                  (this.props.showRoot || this.props.keyName != '(root)') && [
-                  React.createElement("label", null, this.props.keyName, ":"),
+                  React.createElement("label", {onClick: this.handleClick}, this.props.keyName, ":"),
                   React.createElement("span", null, this.getItemString())
                 ], 
                 React.createElement("ol", {style: childListStyle}, 
@@ -221,7 +221,7 @@ var JSONObjectNode = React.createClass({displayName: 'JSONObjectNode',
         return (
             React.createElement("li", {className: cls}, 
                  ( this.props.showRoot || this.props.keyName != '(root)' ) && [
-                  React.createElement("label", null, this.props.keyName, ":"),
+                  React.createElement("label", {onClick: this.handleClick}, this.props.keyName, ":"),
                   React.createElement("span", null, this.getItemString())
                 ], 
                 React.createElement("ul", {style: childListStyle}, 
