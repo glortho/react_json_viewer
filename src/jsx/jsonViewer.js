@@ -336,8 +336,10 @@ var JSONTree = React.createClass({
         }
     },
     render: function() {
-        var nodeType = objType(this.props.data);
-        var rootNode;
+        var nodeType = objType(this.props.data),
+            initialExpanded = this.props.initialExpanded !== false ? true : false,
+            rootNode;
+
         if (nodeType === 'Object') {
             rootNode = (
               <JSONObjectNode 
@@ -346,7 +348,7 @@ var JSONTree = React.createClass({
                 data            = {this.props.data}
                 keyName         = "(root)"
                 showRoot        = {this.props.showRoot}
-                initialExpanded = {true}
+                initialExpanded = {initialExpanded}
               />
             );
         } else if (nodeType === 'Array') {
@@ -355,7 +357,7 @@ var JSONTree = React.createClass({
                 expansions      = {this.props.expansions}
                 onClickItem     = {this.props.onClickItem}
                 data            = {this.props.data}
-                initialExpanded = {true}
+                initialExpanded = {initialExpanded}
                 showRoot        = {this.props.showRoot}
                 keyName         = "(root)"
               />
