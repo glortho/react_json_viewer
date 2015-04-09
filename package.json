@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/jedverity/react_json_viewer",
   "dependencies": {
-    "react": "^0.12.1"
+    "react": "^0.13.0"
   }
 }
